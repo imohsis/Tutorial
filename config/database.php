@@ -1,5 +1,14 @@
 <?php
 
+$url = parse_url(getenv("mysql://b749d997dd66bd:5c63d435@us-cdbr-iron-east-05.clear
+db.net/heroku_9e29c538261fb43?reconnect=true"));
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
+
+
 return [
 
     /*
@@ -41,11 +50,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', $host),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', $database),
+            'username' => env('DB_USERNAME', $username),
+            'password' => env('DB_PASSWORD', $password),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
